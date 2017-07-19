@@ -4,14 +4,6 @@ var request       = require('request');
 var dotenv        = require('dotenv');
 var SpotifyWebApi = require('spotify-web-api-node');
 
-var SlackBot = require('slackbots');
-
-// create a bot
-var bot = new SlackBot({
-    token: process.env.BOT_TOKEN,
-    name: 'dj_cat'
-});
-
 dotenv.load();
 
 var spotifyApi = new SpotifyWebApi({
