@@ -91,11 +91,11 @@ app.post('/store', function(req, res) {
               var message = 'Track added' + (process.env.SLACK_OUTGOING === 'true' ? ' by *' + req.body.user_name + '*' : '') + ': *' + track.name + '* by *' + track.artists[0].name + '*'
 
 
-              slackbot.send("#jukebox-playlist", message, function(err, res, body) {
-                if (err){
-                  return slack(res, message);
-                }
-              });
+              // slackbot.send("#jukebox-playlist", message, function(err, res, body) {
+              //   if (err){
+              //     return slack(res, message);
+              //   }
+              // });
 
 
               return slack(res, message);
