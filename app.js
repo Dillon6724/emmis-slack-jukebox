@@ -94,7 +94,7 @@ app.post('/store', function(req, res) {
               slackbot.send("#jukebox-playlist", message, function(err, res, body) {
                 if (err) {
                   console.log('CAT ERROR: ', err)
-                  return
+                  return slack(res, message);
                 }
               });
 
