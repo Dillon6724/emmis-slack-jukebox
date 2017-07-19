@@ -99,8 +99,6 @@ app.post('/store', function(req, res) {
             .then(function(data) {
               var message = 'Track added' + (process.env.SLACK_OUTGOING === 'true' ? ' by *' + req.body.user_name + '*' : '') + ': *' + track.name + '* by *' + track.artists[0].name + '*'
 
-              bot.postMessageToChannel('jukebox-playlist', message, params);
-
               return slack(res, message);
             }, function(err) {
               return slack(res, err.message);
