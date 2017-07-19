@@ -5,14 +5,8 @@ var dotenv        = require('dotenv');
 var SpotifyWebApi = require('spotify-web-api-node');
 
 var Slackbot = require('slackbot')
-
 var slackbot = new Slackbot('emmisdigital', process.env.BOT_TOKEN);
 
-slackbot.send("#jukebox-playlist", message, function(err, res, body) {
-  if (err){
-    return
-  }
-});
 
 dotenv.load();
 
