@@ -19,7 +19,6 @@
     "dotenv": "~1.0.0",
     "express": "~4.12.3",
     "request": "~2.53.0",
-    "slackbots": "^1.0.2",
     "spotify-web-api-node": "~2.2.0"
   },
   "engines": {
