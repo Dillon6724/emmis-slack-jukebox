@@ -4,6 +4,16 @@ var request       = require('request');
 var dotenv        = require('dotenv');
 var SpotifyWebApi = require('spotify-web-api-node');
 
+var Slackbot = require('slackbot')
+
+var slackbot = new Slackbot('emmisdigital', process.env.BOT_TOKEN);
+
+slackbot.send("#jukebox-playlist", message, function(err, res, body) {
+  if (err){
+    return
+  }
+});
+
 dotenv.load();
 
 var spotifyApi = new SpotifyWebApi({
@@ -85,6 +95,15 @@ app.post('/store', function(req, res) {
           spotifyApi.addTracksToPlaylist(process.env.SPOTIFY_USERNAME, process.env.SPOTIFY_PLAYLIST_ID, ['spotify:track:' + track.id])
             .then(function(data) {
               var message = 'Track added' + (process.env.SLACK_OUTGOING === 'true' ? ' by *' + req.body.user_name + '*' : '') + ': *' + track.name + '* by *' + track.artists[0].name + '*'
+
+
+              slackbot.send("#jukebox-playlist", message, function(err, res, body) {
+                if (err){
+                  return slack(res, message);
+                }
+              });
+
+
               return slack(res, message);
             }, function(err) {
               return slack(res, err.message);
