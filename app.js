@@ -6,13 +6,11 @@ var SpotifyWebApi = require('spotify-web-api-node');
 
 
 Slack = require('node-slackr');
-slack = new Slack(process.env.BOT_TOKEN, {
+slackHook = new Slack(process.env.BOT_TOKEN, {
   channel: "#jukebox-playlist",
   username: "DJ_MEOW",
   icon_emoji: ":cat:"
 });
-
-slack.notify(messages);
 
 dotenv.load();
 
@@ -96,7 +94,7 @@ app.post('/store', function(req, res) {
             .then(function(data) {
               var message = 'Track added' + (process.env.SLACK_OUTGOING === 'true' ? ' by *' + req.body.user_name + '*' : '') + ': *' + track.name + '* by *' + track.artists[0].name + '*'
 
-              slack.notify(message);
+              slackHook.notify(message);
 
               return slack(res, message);
             }, function(err) {
