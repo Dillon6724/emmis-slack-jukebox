@@ -4,9 +4,15 @@ var request       = require('request');
 var dotenv        = require('dotenv');
 var SpotifyWebApi = require('spotify-web-api-node');
 
-var Slackbot = require('slackbot')
-var slackbot = new Slackbot('emmisdigital', process.env.BOT_TOKEN);
 
+Slack = require('node-slackr');
+slack = new Slack(process.env.BOT_TOKEN, {
+  channel: "#jukebox-playlist",
+  username: "DJ_MEOW",
+  icon_emoji: ":cat:"
+});
+
+slack.notify(messages);
 
 dotenv.load();
 
@@ -90,14 +96,7 @@ app.post('/store', function(req, res) {
             .then(function(data) {
               var message = 'Track added' + (process.env.SLACK_OUTGOING === 'true' ? ' by *' + req.body.user_name + '*' : '') + ': *' + track.name + '* by *' + track.artists[0].name + '*'
 
-
-              slackbot.send("#jukebox-playlist", message, function(err, res, body) {
-                if (err) {
-                  console.log('CAT ERROR: ', err)
-                  return slack(res, message);
-                }
-              });
-
+              slack.notify(message);
 
               return slack(res, message);
             }, function(err) {
