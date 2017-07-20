@@ -8,7 +8,8 @@ var SpotifyWebApi = require('spotify-web-api-node');
 Slack = require('node-slackr');
 slackHook = new Slack(process.env.BOT_TOKEN, {
   channel: "#jukebox-playlist",
-  username: "DJ_MEOW",
+  username: "DJ MEOW",
+  icon_url: "http://base.emmis.acsitefactory.com/sites/g/files/exi266/f/201707/grumpy.jpg",
   icon_emoji: ":cat:"
 });
 
